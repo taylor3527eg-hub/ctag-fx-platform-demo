@@ -3,10 +3,591 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CTAG-FX Platform</title>
+  <title>CTAG-FX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>CTAG-FX Platform</h1>
-  <p>Natural Language-Guided Audio FX Generation</p>
+
+  <!-- Hero -->
+  <section class="hero section-white">
+    <div class="hero-content">
+      <h1>CTAG-FX</h1>
+
+      <p class="hero-subtitle">
+        Reinterpreting Synthesizer Parameter Spaces
+      </p>
+
+      <p>
+        for Expressive Tone-Shaping Audio FX Design
+      </p>
+
+      <div class="hero-buttons">
+        <a aria-disabled="true" title="Paper link coming soon">Paper</a>
+        <a href="#demo">Performance</a>
+        <a href="#sample">Audio Examples</a>
+        <a href="#code">Code</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Overview -->
+  <section class="section-gray">
+    <div class="section-inner">
+      <h2>Overview</h2>
+      <p>
+        Recent text-guided audio FX research has focused on translating
+        natural-language descriptions into parameters or chain configurations
+        within existing FX systems. However, comparatively little attention has
+        been paid to how the internal control space of an individual FX processor
+        can itself be constructed. To address this gap, we propose CTAG-FX, which
+        functionally reinterprets the roles of 78 parameters in a text-conditioned
+        synthesizer configuration as controls of a tone-shaping FX processor. Each
+        synthesizer configuration defines a fixed tone-shaping processor that can
+        be repeatedly applied to new audio inputs rather than producing only a
+        one-off rendered output. The text-conditioned synthesizer configurations
+        are generated using A&amp;R-CTAG, a retrieval-enhanced extension of CTAG.
+        We evaluate CTAG-FX through signal-level analysis and perceptual evaluation,
+        together with a scrambled-mapping ablation in which parameter-to-control
+        assignments are randomly permuted to assess the contribution of the proposed
+        role assignment. Role-based mapping produces prompt-distinct spectral and
+        nonlinear behavior, whereas scrambling reduces this prompt-specific
+        differentiation and yields a more prompt-insensitive nonlinear profile. In
+        the listening study, the resulting processors were generally perceived as
+        plausible tone-shaping effects, while synth-mediated character
+        reinterpretation showed greater variability across prompts, evaluation
+        stages, and participants. Overall, these results suggest that synthesizer
+        parameter spaces can serve not only as sound-generation spaces but also as
+        design resources for constructing new audio-FX control spaces.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- Performance -->
+  <section id="demo" class="section-white">
+    <div class="section-inner">
+      <h2>Performance</h2>
+      <p>
+        Once a CTAG-FX configuration is fixed, its input-output response can be
+        captured with Neural Amp Modeler (NAM) and loaded into a compatible host
+        for real-time processing. The examples below demonstrate the resulting
+        playable guitar tones.
+      </p>
+
+      <div class="performance-video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/6vLP4XBltj4"
+          title="CTAG-FX performance demo"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Step 1. Tone-Shaping FX Operation Test -->
+  <section id="sample" class="section-gray">
+    <div class="section-inner">
+      <h2>Step 1. Tone-Shaping FX Operation Test</h2>
+      <p>
+        This test examines whether the reinterpreted synth-to-FX mapping functions
+        as an actual tone-shaping processor. The same guitar inputs are processed
+        with configurations generated for four tone prompts, ranging from mild
+        clean/crunch characters to strongly nonlinear fuzz/distortion characters.
+      </p>
+
+      <div class="listening-notice" role="note">
+        <strong>Listening Notice</strong>
+        <span>RAW input tracks are quieter than the processed FX outputs. Please lower your volume before moving from RAW inputs to effected audio.</span>
+      </div>
+
+      <div class="objective-raw-grid">
+        <div class="objective-raw-card">
+          <h4>RAW Input (Chord)</h4>
+          <div class="audio-slot media-slot">
+            <audio controls preload="metadata">
+              <source src="assets/video/RAW 2.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="raw-component-box">
+            <span class="raw-component-title">Input Components</span>
+            <dl class="raw-source-list">
+              <div>
+                <dt>Guitar</dt>
+                <dd>Fender American Vintage Reissue 65 Strat</dd>
+              </div>
+              <div>
+                <dt>Pickup</dt>
+                <dd>Fender Custom Shop Fat 50's Pickups / Neck</dd>
+              </div>
+            </dl>
+            <span class="raw-component-subtitle">Processing Chain</span>
+            <ol class="raw-component-chain">
+              <li>Channel EQ</li>
+              <li>UA 1176 Classic FET Compressor (Plug-in)</li>
+              <li>T-Racks EQ 73 (Plug-in)</li>
+              <li>Teletronix LA-2A Leveler (Plug-in)</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="objective-raw-card">
+          <h4>RAW Input (Melody)</h4>
+          <div class="audio-slot media-slot">
+            <audio controls preload="metadata">
+              <source src="assets/video/RAW 1.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="raw-component-box">
+            <span class="raw-component-title">Input Components</span>
+            <dl class="raw-source-list">
+              <div>
+                <dt>Guitar</dt>
+                <dd>Fender American Vintage Reissue 65 Strat</dd>
+              </div>
+              <div>
+                <dt>Pickup</dt>
+                <dd>Fender Custom Shop Fat 50's Pickups / Neck</dd>
+              </div>
+            </dl>
+            <span class="raw-component-subtitle">Processing Chain</span>
+            <ol class="raw-component-chain">
+              <li>Channel EQ</li>
+              <li>UA 1176 Classic FET Compressor (Plug-in)</li>
+              <li>T-Racks EQ 73 (Plug-in)</li>
+              <li>Teletronix LA-2A Leveler (Plug-in)</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="demo-card">
+          <div class="card-header">
+            <h4>Chewy Amp Crunch</h4>
+            <button class="param-button" data-param-id="objective-chewy-amp-crunch">Parameters</button>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Chord)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Chewy_2.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Melody)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Chewy_1.wav" type="audio/wav">
+            </audio>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="card-header">
+            <h4>Germanium Fuzz</h4>
+            <button class="param-button" data-param-id="objective-germanium-fuzz">Parameters</button>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Chord)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Fuzz_2.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Melody)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Fuzz_1.wav" type="audio/wav">
+            </audio>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="card-header">
+            <h4>RAT-style Distortion</h4>
+            <button class="param-button" data-param-id="objective-proco-rat-style-distortion">Parameters</button>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Chord)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/RAT_2.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Melody)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/RAT_1.wav" type="audio/wav">
+            </audio>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="card-header">
+            <h4>Soft Creamy Clean</h4>
+            <button class="param-button" data-param-id="objective-soft-creamy-clean">Parameters</button>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Chord)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Clean_2.wav" type="audio/wav">
+            </audio>
+          </div>
+          <div class="audio-slot media-slot">
+            <span class="media-slot-label">Prompt-Consistent Output (Melody)</span>
+            <audio controls preload="metadata">
+              <source src="assets/video/Clean_1.wav" type="audio/wav">
+            </audio>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Step 2. Character-Reinterpretation FX Test -->
+  <section class="section-white">
+    <div class="section-inner">
+      <h2>Step 2. Character-Reinterpretation FX Test</h2>
+      <p>
+        This test examines whether character cues encoded in A&amp;R-CTAG's
+        synth-side representations can be plausibly recast as tone-shaping FX
+        characters for external audio. The materials support separate comparisons
+        of reference-to-synth concept correspondence and synth-to-FX character
+        correspondence.
+      </p>
+
+
+      <!-- Reference Character Comparison -->
+      <div class="group-box">
+        <h3>Reference–Synth Character Correspondence</h3>
+        <p>
+          Four reference sounds used in the user study are compared with the
+          corresponding A&amp;R-CTAG synthesized character representations.
+        </p>
+
+        <div class="demo-grid">
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Little Birds Chirping</h4>
+              <button class="param-button" data-param-id="exploratory-bird-chirp">
+                Parameters
+              </button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7963</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">Reference Sound</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/Little Birds Chirping_Reference.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_cheerful_chorus_of_delicate_bird_chirps_greeting_576772_000_-0.7963.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Cow Moo</h4>
+              <button class="param-button" data-param-id="exploratory-cow-moo">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7591</p>
+            
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">Reference Sound</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/Cow Moo_Reference.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_gentle_and_friendly_cartoon_cow_moo_constructed_fefaf7_000_-0.7591.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Emergency Police Siren</h4>
+              <button class="param-button" data-param-id="additional-emergency-police-siren">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7544</p>
+            
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">Reference Sound</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/Police siren.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_classic_emergency_siren_sound_conveying_urgent_d_c97478_000_-0.7544.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Wooden Box Open</h4>
+              <button class="param-button" data-param-id="additional-wooden-box-open">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.6556</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">Reference Sound</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/wooden box.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_rustic_wooden_box_being_opened_with_a_creaky_hin_8a0d40_000_-0.6556.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Additional A&R-CTAG Character Samples -->
+      <div class="group-box">
+        <h3>Additional A&amp;R-CTAG Character Samples</h3>
+        <p>
+          These are additional A&amp;R-CTAG synthesized character examples.
+          They are included as standalone listening samples beyond the user study examples.
+        </p>
+
+        <div class="demo-grid">
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Pencil Writing on Paper</h4>
+              <button class="param-button" data-param-id="exploratory-pencil-writing">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.6944</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_gentle_pencil_sketching_across_paper_constructe_af7c0a_000_-0.6944.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>High-Pitched Mouse Squeak</h4>
+              <button class="param-button" data-param-id="additional-high-pitched-mouse-squeak">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7859</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_high-pitched_mouse_squeak_constructed_using_a_s_4806d5_000_-0.7859.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>A Beautiful Ocean Tide</h4>
+              <button class="param-button" data-param-id="exploratory-ocean-tide">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.6129</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/An_awe-inspiring_sound_of_the_ocean_shores_tide_19548d_000_-0.6129.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>A Kitty Cat Meow</h4>
+              <button class="param-button" data-param-id="additional-kitty-cat-meow">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7818</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_typical_cat_meow_reflecting_various_emotions_co_e061e5_000_-0.7818.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>A Playful Monkey Ook-Ook</h4>
+              <button class="param-button" data-param-id="additional-playful-monkey-ook-ook">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.7947</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/A_playful_monkey_‘ook-ook’_chatter_squeaky_and_na_8d909f_000_-0.7947.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Pig Oink Oink with Lower Tone</h4>
+              <button class="param-button" data-param-id="additional-pig-oink-lower-tone">Parameters</button>
+            </div>
+
+            <p class="score-text">CLAP Score: 0.4257</p>
+
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">A&amp;R-CTAG Synth Character</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/Pig_Oink_Oink_with_lower_tone_000_-0.4257.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- CTAG-FX Reinterpreted Results -->
+      <div class="group-box">
+        <h3>Synth–FX Character Correspondence</h3>
+        <p>
+          The following examples show how A&amp;R-CTAG character representations
+          are applied to guitar RAW input as final tone-shaping FX outputs.
+        </p>
+
+        <div class="demo-grid">
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Little Birds Chirping</h4>
+              <button class="param-button" data-param-id="exploratory-bird-chirp">
+                Parameters
+              </button>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Chord)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/Bird_2.wav" type="audio/wav">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Melody)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/bird_1.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Cow Moo</h4>
+              <button class="param-button" data-param-id="exploratory-cow-moo">Parameters</button>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Chord)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/cow_2.wav" type="audio/wav">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Melody)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/cow_1.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Emergency Police Siren</h4>
+              <button class="param-button" data-param-id="additional-emergency-police-siren">Parameters</button>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Chord)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/siren_2.wav" type="audio/wav">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Melody)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/siren_1.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <div class="card-header">
+              <h4>Wooden Box Open</h4>
+              <button class="param-button" data-param-id="additional-wooden-box-open">Parameters</button>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Chord)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/wooden_box_2.wav" type="audio/wav">
+              </audio>
+            </div>
+            <div class="audio-slot media-slot">
+              <span class="media-slot-label">CTAG-FX Reinterpreted Output (Melody)</span>
+              <audio controls preload="metadata">
+                <source src="assets/video/wooden_box_1.wav" type="audio/wav">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Code Availability -->
+  <section id="code" class="section-gray">
+    <div class="section-inner">
+      <h2>Code</h2>
+      <p>
+        Code release coming soon.
+      </p>
+    </div>
+  </section>
+
+  <!-- Parameter Modal -->
+  <div id="param-modal" class="param-modal">
+    <div class="param-modal-content">
+      <button id="param-modal-close" class="param-modal-close">×</button>
+
+      <h3>Parameters</h3>
+
+      <div class="param-code-box">
+        <button id="copy-param-button" class="copy-param-button">Copy code</button>
+        <pre id="param-modal-text"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="parameters.js?v=objective-rat-params-20260629"></script>
+  <script src="main.js?v=objective-rat-params-20260629"></script>
+
 </body>
 </html>
