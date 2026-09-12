@@ -546,3 +546,18 @@ p {
   font-size: 14px;
   color: #777777;
 }
+
+.contact-info {
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-info a:hover {
+  opacity: 0.65;
+}
