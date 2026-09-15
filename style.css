@@ -563,17 +563,23 @@ p {
 }
 
 .overview-figure {
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 2.2 / 1;
+  margin: 24px auto 12px auto;
+  overflow: hidden;
+}
+
+.overview-figure object {
   display: block;
   width: 100%;
-  max-width: 1200px;
-  height: auto;
-  margin: 24px auto 40px auto;
+  height: 100%;
+  border: none;
 }
 
 .figure-caption {
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.75;
-  margin-top: -24px;
   margin-bottom: 40px;
 }
