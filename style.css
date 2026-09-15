@@ -561,3 +561,19 @@ p {
 .contact-info a:hover {
   opacity: 0.65;
 }
+
+.overview-figure {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 24px auto 40px auto;
+}
+
+.figure-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: -24px;
+  margin-bottom: 40px;
+}
