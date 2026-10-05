@@ -37,29 +37,22 @@
     <div class="section-inner">
       <h2>Overview</h2>
       <p>
-        Recent text-guided audio FX research has focused on translating
-        natural-language descriptions into parameters or chain configurations
-        within existing FX systems. However, comparatively little attention has
-        been paid to how the internal control space of an individual FX processor
-        can itself be constructed. To address this gap, we propose CTAG-FX, which
-        functionally reinterprets the roles of 78 parameters in a text-conditioned
-        synthesizer configuration as controls of a tone-shaping FX processor. Each
-        synthesizer configuration defines a fixed tone-shaping processor that can
-        be repeatedly applied to new audio inputs rather than producing only a
-        one-off rendered output. The text-conditioned synthesizer configurations
-        are generated using A&amp;R-CTAG, a retrieval-enhanced extension of CTAG.
-        We evaluate CTAG-FX through signal-level analysis and perceptual evaluation,
-        together with a scrambled-mapping ablation in which parameter-to-control
-        assignments are randomly permuted to assess the contribution of the proposed
-        role assignment. Role-based mapping produces prompt-distinct spectral and
-        nonlinear behavior, whereas scrambling reduces this prompt-specific
-        differentiation and yields a more prompt-insensitive nonlinear profile. In
-        the listening study, the resulting processors were generally perceived as
-        plausible tone-shaping effects, while synth-mediated character
-        reinterpretation showed greater variability across prompts, evaluation
-        stages, and participants. Overall, these results suggest that synthesizer
-        parameter spaces can serve not only as sound-generation spaces but also as
-        design resources for constructing new audio-FX control spaces.
+        Recent text-guided audio FX research has focused on translating natural-language 
+        descriptions into parameters or chain configurations within existing FX systems. 
+        However, comparatively little attention has been paid to how the internal control 
+        space of an individual FX processor can itself be constructed. To address this gap, 
+        we propose CTAG-FX, which functionally reinterprets the roles of 78 parameters in 
+        a text-conditioned synthesizer configuration as controls of a tone-shaping FX processor. 
+        Each synthesizer configuration defines a fixed tone-shaping processor that can be 
+        repeatedly applied to new audio inputs rather than producing only a one-off rendered output. 
+        The text-conditioned synthesizer configurations are generated using A\&R-CTAG, a retrieval-
+        enhanced extension of CTAG. We evaluate CTAG-FX through signal-level analysis, together with 
+        a scrambled-mapping ablation in which parameter-to-control assignments are randomly permuted 
+        o assess the contribution of the proposed role assignment. Role-based mapping produces prompt-
+        distinct spectral and nonlinear behavior, whereas scrambling reduces this prompt-specific 
+        differentiation and yields a more prompt-insensitive nonlinear profile. Overall, these results 
+        suggest that synthesizer parameter spaces can serve not only as sound-generation spaces but also 
+        as design resources for constructing new audio-FX control spaces.
       </p>
       
       <a href="assets/video/R_Figure.svg" target="_blank">
